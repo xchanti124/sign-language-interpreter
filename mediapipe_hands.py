@@ -1,5 +1,7 @@
 import cv2
 import mediapipe as mp
+
+from Letter import Letter
 from input_handler import *
 
 mp_drawing = mp.solutions.drawing_utils
@@ -94,13 +96,8 @@ with mp_hands.Hands(
                 )
 
                 if key_pressed != -1:
-                    for i in range(0, 21):
-                        xy_tuple = (
-                            hand_landmarks.landmark[i].x,
-                            hand_landmarks.landmark[i].y,
-                        )
-                        landmark_dict[chr(key_pressed)].append(xy_tuple)
-                    print(landmark_dict)
+                    Letter(key_pressed, hand_landmarks)
+                    print(Letter.dictionary)
 
         # Flip the image horizontally for a selfie-view display.
         image = cv2.flip(image, 1)
