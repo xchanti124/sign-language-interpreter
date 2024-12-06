@@ -10,16 +10,8 @@ def save_json(file_path, data):
 
 class Letter:
 
-    hand_landmark_names = ["WRIST", "THUMB_CMC", "THUMB_MCP", "THUMB_IP", "THUMP_TIP",
-                           "INDEX_FINGER_MCP", "INDEX_FINGER_PIP", "INDEX_FINGER_DIP", "INDEX_FINGER_TIP",
-                           "MIDDLE_FINGER_MCP", "MIDDLE_FINGER_PIP", "MIDDLE_FINGER_DIP", "MIDDLE_FINGER_TIP",
-                           "RING_FINGER_MCP", "RING_FINGER_PIP", "RING_FINGER_DIP", "RING_FINGER_TIP",
-                           "PINKY_MCP", "PINKY_PIP", "PINKY_DIP", "PINKY_TIP"]
-
-    try:
-        dictionary = load_json('data.json')
-    except:
-        dictionary = {}
+    coordinate_list = []
+    label_list = []
 
     def __init__(self, letter: chr, landmarks):
         self.letter = chr(letter)
