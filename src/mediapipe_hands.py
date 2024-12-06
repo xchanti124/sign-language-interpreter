@@ -1,8 +1,7 @@
-import cv2
 import mediapipe as mp
 
-from Letter import Letter
-from input_handler import *
+from src.Letter import Letter
+from src.input_handler import *
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -52,7 +51,6 @@ with mp_hands.Hands(
             )
 
 # For video feed
-landmark_dict = create_landmark_coordinate_dict()
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
     model_complexity=1, min_detection_confidence=0.5, min_tracking_confidence=0.5
@@ -97,21 +95,10 @@ with mp_hands.Hands(
 
                 if key_pressed != -1:
                     Letter(key_pressed, hand_landmarks)
-                    print(Letter.dictionary)
 
         # Flip the image horizontally for a selfie-view display.
         image = cv2.flip(image, 1)
 
-        cv2.putText(
-            image,
-            "Wrist x:" + str(x),
-            (10, 80),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            1,
-            cv2.LINE_AA,
-        )
         cv2.imshow("meow meow meow meow", image)
 
         if cv2.waitKey(5) & 0xFF == 27:
