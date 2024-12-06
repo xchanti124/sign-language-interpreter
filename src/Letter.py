@@ -8,6 +8,17 @@ def save_json(file_path, data):
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
+def load_data(self):
+    try:
+        self.coordinate_list = load_json('coordinate_data.json')
+        self.label_list = load_json('label_data.json')
+    except Exception:
+        pass
+
+def save_data(self):
+    save_json('coordinate_data.json', self.coordinate_list)
+    save_json('label_data.json', self.label_list)
+
 class Letter:
 
     coordinate_list = []
