@@ -25,21 +25,23 @@ class Letter:
     label_list = []
 
     def __init__(self, letter: chr, landmarks):
+        load_data(self)
         self.letter = chr(letter)
         self.landmarks = landmarks
-        self.x = 0.0
-        self.y = 0.0
-        if self.letter not in self.dictionary:
-            self.dictionary[self.letter] = []
         self.process()
 
     def process(self):
-        landmark_map = {}
-        for i in range(0, 21):
-            hand_landmark_name = self.hand_landmark_names[i]
-            self.x = self.landmarks.landmark[i].x
-            self.y = self.landmarks.landmark[i].y
-            landmark_map[hand_landmark_name] = {'x': self.x, 'y': self.y}
+        self.label_list.append(self.letter)
+        print(self.letter)
+        landmark_list = []
+        for i in range(21):
+            try:
+                x = self.landmarks.landmark[i].x
+                y = self.landmarks.landmark[i].y
+                landmark_list.append(x)
+                landmark_list.append(y)
+            except AttributeError:
+                print(f"Error: Landmark {i} is missing or does not have 'x' and 'y'.")
+        self.coordinate_list.append(landmark_list)
+        save_data(self)
 
-        self.dictionary[self.letter].append(landmark_map)
-        save_json('data.json', self.dictionary)
