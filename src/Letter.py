@@ -1,4 +1,5 @@
 import json
+import numpy as np
 
 def load_json(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -35,13 +36,11 @@ class Letter:
         print(self.letter)
         landmark_list = []
         for i in range(21):
-            try:
                 x = self.landmarks.landmark[i].x
                 y = self.landmarks.landmark[i].y
                 landmark_list.append(x)
                 landmark_list.append(y)
-            except AttributeError:
-                print(f"Error: Landmark {i} is missing or does not have 'x' and 'y'.")
+
         self.coordinate_list.append(landmark_list)
         save_data(self)
 
