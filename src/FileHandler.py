@@ -37,3 +37,7 @@ def load_csv_data(self):
         self.label_list = load_csv('label_data.csv')
     except Exception:
         pass
+
+def save_csv_data(self):
+    save_csv('coordinate_data.csv', self.coordinate_list)
+    save_csv('label_data.csv', self.label_list)

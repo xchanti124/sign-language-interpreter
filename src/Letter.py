@@ -6,7 +6,7 @@ class Letter:
     label_list = []
 
     def __init__(self, letter: chr, landmarks):
-        FileHandler.load_json_data(self)
+        FileHandler.load_csv_data(self)
         self.letter = chr(letter)
         self.landmarks = landmarks
         self.process()
@@ -22,5 +22,5 @@ class Letter:
                 landmark_list.append(y)
 
         self.coordinate_list.append(landmark_list)
-        FileHandler.save_json_data(self)
+        FileHandler.save_csv_data(self)
 
