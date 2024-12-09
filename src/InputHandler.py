@@ -5,7 +5,7 @@ from src.State import State
 current_letter = None
 current_state = State.SELECTING_LETTER
 
-def get_pressed_key():
+def updated_pressed_key():
     global current_letter, current_state
     key = cv2.pollKey()
     if 97 <= key <= 122:
