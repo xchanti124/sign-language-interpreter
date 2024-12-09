@@ -1,7 +1,7 @@
 import mediapipe as mp
 
 from src.Letter import Letter
-from src.input_handler import *
+from src.InputHandler import *
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -79,10 +79,8 @@ with mp_hands.Hands(
             color=(255, 0, 0), thickness=2
         )  # Blue connections
 
-        x = 0
         if results.multi_hand_landmarks:
             key_pressed = is_key_pressed()
-            itr = 0
 
             for hand_landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(
