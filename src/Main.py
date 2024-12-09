@@ -32,9 +32,12 @@ while running:
                     cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         cv2.putText(image, "Samples: " + str(count), (50, 150), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2,
                     cv2.LINE_AA)
+        count += 1
+        if count == 1000:
+            InputHandler.current_state = State.SELECTING_LETTER
+            count = 0
 
     cv2.putText(image, text, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-
     ########################################################################################
 
     cv2.imshow("meow meow meow meow", image)
