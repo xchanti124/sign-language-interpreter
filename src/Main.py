@@ -22,9 +22,18 @@ while running:
     # More processing before showing the image
     ########################################################################################
     if InputHandler.current_state == State.SELECTING_LETTER:
-        pass
+        text = "Press a letter to start capturing landmarks"
+
     else:
+        text = "Currently capturing landmarks for the letter " + chr(InputHandler.current_letter)
+
         image = processFrame(cap)
+        cv2.putText(image, "Press BACKSPACE to choose another letter or ESC to exit", (50, 100),
+                    cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(image, "Samples: " + str(count), (50, 150), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2,
+                    cv2.LINE_AA)
+
+    cv2.putText(image, text, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     ########################################################################################
 
