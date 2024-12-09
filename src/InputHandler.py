@@ -1,6 +1,6 @@
 import cv2
 
-def is_key_pressed():
+def get_pressed_key():
     key = cv2.pollKey()
 
     return key
