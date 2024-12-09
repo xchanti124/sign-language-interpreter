@@ -19,7 +19,7 @@ custom_connection_style = mp_drawing.DrawingSpec(
     color=(255, 0, 0), thickness=2
 )
 
-def processFrame(cap):
+def processFrame(cap, save_landmarks):
     success, image = cap.read()
     if not success:
         print("Ignoring empty camera frame.")
@@ -48,6 +48,7 @@ def processFrame(cap):
                 custom_connection_style,
             )
 
-            Letter(InputHandler.current_letter, hand_landmarks)
+            if save_landmarks:
+                Letter(InputHandler.current_letter, hand_landmarks)
 
     return image

@@ -7,6 +7,7 @@ from src.State import State
 
 ESC_KEY = 27
 running = True
+count = 0
 
 cap = cv2.VideoCapture(0)
 
@@ -23,11 +24,12 @@ while running:
     ########################################################################################
     if InputHandler.current_state == State.SELECTING_LETTER:
         text = "Press a letter to start capturing landmarks"
+        image = processFrame(cap, False)
 
     else:
         text = "Currently capturing landmarks for the letter " + chr(InputHandler.current_letter)
 
-        image = processFrame(cap)
+        image = processFrame(cap, True)
         cv2.putText(image, "Press BACKSPACE to choose another letter or ESC to exit", (50, 100),
                     cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         cv2.putText(image, "Samples: " + str(count), (50, 150), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2,
