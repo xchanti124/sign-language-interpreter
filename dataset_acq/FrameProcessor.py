@@ -52,3 +52,22 @@ def processFrame(cap, save_landmarks):
                 Letter(InputHandler.current_letter, hand_landmarks)
 
     return image
+
+def getHandLandmarks(cap):
+    success, image = cap.read()
+    if not success:
+        print("Ignoring empty camera frame.")
+        return None
+
+    results = hands.process(image)
+    landmark_list = []
+
+    if results.multi_hand_landmarks:
+
+        for i in range(21):
+            x = results.multi_hand_landmarks[0].landmark[i].x
+            y = results.multi_hand_landmarks[0].landmark[i].y
+            landmark_list.append(x)
+            landmark_list.append(y)
+
+    return landmark_list
