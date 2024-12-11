@@ -4,9 +4,10 @@ from dataset_acq.State import State
 
 current_letter = None
 current_state = State.SELECTING_LETTER
+count = 0
 
 def updatedPressedKey():
-    global current_letter, current_state
+    global current_letter, current_state, count
     key = cv2.pollKey()
     if 97 <= key <= 122:
         current_letter = key
@@ -14,4 +15,5 @@ def updatedPressedKey():
     elif key == 127:
         current_letter = None
         current_state = State.SELECTING_LETTER
+        count = 0
 

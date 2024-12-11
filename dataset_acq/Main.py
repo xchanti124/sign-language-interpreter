@@ -9,7 +9,6 @@ def main():
     cap = VideoCaptureThread(0)
     ESC_KEY = 27
     running = True
-    count = 0
 
     while running:
         image = cap.read()
@@ -34,11 +33,11 @@ def main():
 
             image = processFrame(image, True, results)
             drawString(image, "Press BACKSPACE to choose another letter or ESC to exit", 50, 100)
-            drawString(image, "Samples: " + str(count), 50, 150)
-            count += 1
-            if count == 1000:
+            drawString(image, "Samples: " + str(InputHandler.count), 50, 150)
+            InputHandler.count += 1
+            if InputHandler.count == 1000:
                 InputHandler.current_state = State.SELECTING_LETTER
-                count = 0
+                InputHandler.count = 0
 
         drawString(image, text, 50, 50)
         ########################################################################################
@@ -52,8 +51,7 @@ def main():
     cv2.destroyAllWindows()
 
 def drawString(image, text, x, y):
-    cv2.putText(image, text, (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-
+    cv2.putText(image, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
 if __name__ == "__main__":
     main()
