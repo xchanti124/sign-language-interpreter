@@ -25,24 +25,22 @@ def main():
 
         if InputHandler.current_state == State.SELECTING_LETTER:
             text = "Press a letter to start capturing landmarks"
-            image = processFrame(cap.read(), False, results)
+            image = processFrame(image, False, results)
 
             getHandLandmarks(results)
 
         else:
             text = "Currently capturing landmarks for the letter " + chr(InputHandler.current_letter)
 
-            image = processFrame(cap.read(), True, results)
-            cv2.putText(image, "Press BACKSPACE to choose another letter or ESC to exit", (50, 100),
-                        cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(image, "Samples: " + str(count), (50, 150), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2,
-                        cv2.LINE_AA)
+            image = processFrame(image, True, results)
+            drawString(image, "Press BACKSPACE to choose another letter or ESC to exit", 50, 100)
+            drawString(image, "Samples: " + str(count), 50, 150)
             count += 1
             if count == 1000:
                 InputHandler.current_state = State.SELECTING_LETTER
                 count = 0
 
-        cv2.putText(image, text, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        drawString(image, text, 50, 50)
         ########################################################################################
 
         cv2.imshow("mrreeeowwwww", image)
@@ -52,6 +50,10 @@ def main():
 
     cap.stop()
     cv2.destroyAllWindows()
+
+def drawString(image, text, x, y):
+    cv2.putText(image, text, (x, y), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
 
 if __name__ == "__main__":
     main()
