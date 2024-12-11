@@ -1,8 +1,8 @@
 import mediapipe as mp
 import cv2
 
-from src import InputHandler
-from src.Letter import Letter
+from dataset_acq import InputHandler
+from dataset_acq.Letter import Letter
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles

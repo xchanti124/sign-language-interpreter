@@ -1,4 +1,4 @@
-from src import FileHandler
+from dataset_acq import FileHandler
 
 class Letter:
 

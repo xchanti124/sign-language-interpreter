@@ -1,6 +1,6 @@
 import cv2
 
-from src.State import State
+from dataset_acq.State import State
 
 current_letter = None
 current_state = State.SELECTING_LETTER

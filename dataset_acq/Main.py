@@ -1,9 +1,9 @@
 import cv2
 
-from src import InputHandler
-from src.InputHandler import updated_pressed_key
-from src.FrameProcessor import processFrame
-from src.State import State
+from dataset_acq import InputHandler
+from dataset_acq.InputHandler import updated_pressed_key
+from dataset_acq.FrameProcessor import processFrame
+from dataset_acq.State import State
 
 ESC_KEY = 27
 running = True
