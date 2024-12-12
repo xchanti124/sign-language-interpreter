@@ -1,11 +1,18 @@
 import cv2
+
+from DataLoader import DataLoader
+from FileHandler import save_data_loader
 from dataset_acq import InputHandler, FrameProcessor
 from dataset_acq.InputHandler import updatedPressedKey
 from dataset_acq.FrameProcessor import processFrame, getHandLandmarks
 from dataset_acq.State import State
 from dataset_acq.VideoCaptureThread import VideoCaptureThread
 
+data_loader = DataLoader()
+
 def main():
+    data_loader.load_csv_data()
+
     cap = VideoCaptureThread(0)
     ESC_KEY = 27
     running = True
@@ -26,16 +33,15 @@ def main():
             text = "Press a letter to start capturing landmarks"
             image = processFrame(image, False, results)
 
-            getHandLandmarks(results)
-
         else:
             text = "Currently capturing landmarks for the letter " + chr(InputHandler.current_letter)
-
             image = processFrame(image, True, results)
+
             drawString(image, "Press BACKSPACE to choose another letter or ESC to exit", 50, 100)
             drawString(image, "Samples: " + str(InputHandler.count), 50, 150)
+
             InputHandler.count += 1
-            if InputHandler.count == 1000:
+            if InputHandler.count == 500:
                 InputHandler.current_state = State.SELECTING_LETTER
                 InputHandler.count = 0
 
@@ -47,6 +53,7 @@ def main():
         if cv2.waitKey(1) & 0xFF == ESC_KEY:
             break
 
+    save_data_loader(data_loader)
     cap.stop()
     cv2.destroyAllWindows()
 
