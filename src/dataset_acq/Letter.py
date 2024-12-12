@@ -1,5 +1,4 @@
-from dataset_acq.Main import data_loader
-
+from src.DataLoader import data_loader
 
 class Letter:
 
@@ -19,4 +18,3 @@ class Letter:
                 landmark_list.append(y)
 
         data_loader.coordinate_list.append(landmark_list)
-

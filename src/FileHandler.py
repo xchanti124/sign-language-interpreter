@@ -33,15 +33,15 @@ def save_csv(file_path, data):
 
 def load_csv_data(self):
     try:
-        self.coordinate_list = load_csv('coordinate_data.csv')
-        self.label_list = load_csv('label_data.csv')
+        self.coordinate_list = load_csv('../coordinate_data.csv')
+        self.label_list = load_csv('../label_data.csv')
     except Exception:
         pass
 
 def save_csv_data(self):
-    save_csv('coordinate_data.csv', self.coordinate_list)
-    save_csv('label_data.csv', self.label_list)
+    save_csv('../coordinate_data.csv', self.coordinate_list)
+    save_csv('../label_data.csv', self.label_list)
 
 def save_data_loader(data_loader):
-    save_csv('coordinate_data.csv', data_loader.coordinate_list)
-    save_csv('label_data.csv', data_loader.label_list)
+    save_csv('../coordinate_data.csv', data_loader.coordinate_list)
+    save_csv('../label_data.csv', data_loader.label_list)

@@ -1,17 +1,16 @@
 import cv2
 
-from DataLoader import DataLoader
-from FileHandler import save_data_loader
-from dataset_acq import InputHandler, FrameProcessor
-from dataset_acq.InputHandler import updatedPressedKey
-from dataset_acq.FrameProcessor import processFrame, getHandLandmarks
-from dataset_acq.State import State
-from dataset_acq.VideoCaptureThread import VideoCaptureThread
-
-data_loader = DataLoader()
+from src.DataLoader import data_loader
+from src.FileHandler import save_data_loader
+from src.dataset_acq import FrameProcessor, InputHandler
+from src.dataset_acq.InputHandler import updatedPressedKey
+from src.dataset_acq.FrameProcessor import processFrame
+from src.dataset_acq.State import State
+from src.dataset_acq.VideoCaptureThread import VideoCaptureThread
 
 def main():
     data_loader.load_csv_data()
+    print(len(data_loader.coordinate_list))
 
     cap = VideoCaptureThread(0)
     ESC_KEY = 27
@@ -53,7 +52,8 @@ def main():
         if cv2.waitKey(1) & 0xFF == ESC_KEY:
             break
 
-    save_data_loader(data_loader)
+    print(len(data_loader.coordinate_list))
+    data_loader.save_csv_data()
     cap.stop()
     cv2.destroyAllWindows()
 

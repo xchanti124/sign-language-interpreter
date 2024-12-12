@@ -1,7 +1,7 @@
 import mediapipe as mp
 
-from dataset_acq import InputHandler
-from dataset_acq.Letter import Letter
+from src.dataset_acq import InputHandler
+from src.dataset_acq.Letter import Letter
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -47,4 +47,6 @@ def getHandLandmarks(results):
             y = results.multi_hand_landmarks[0].landmark[i].y
             landmark_list.append(x)
             landmark_list.append(y)
+
+    return landmark_list
 
