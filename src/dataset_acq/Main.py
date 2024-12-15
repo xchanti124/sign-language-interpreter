@@ -1,22 +1,20 @@
 import cv2
 
 from src.DataLoader import data_loader
-from src.FileHandler import save_data_loader
-from src.dataset_acq import FrameProcessor, InputHandler
+from src.dataset_acq import InputHandler
+from src import FrameProcessor
 from src.dataset_acq.InputHandler import updatedPressedKey
-from src.dataset_acq.FrameProcessor import processFrame
+from src.FrameProcessor import processFrame
 from src.dataset_acq.State import State
-from src.dataset_acq.VideoCaptureThread import VideoCaptureThread
+from src.VideoCaptureThread import VideoCaptureThread
 
 def main():
     data_loader.load_csv_data()
-    print(len(data_loader.coordinate_list))
 
     cap = VideoCaptureThread(0)
     ESC_KEY = 27
-    running = True
 
-    while running:
+    while True:
         image = cap.read()
         if image is None:
             print("No frame captured")
@@ -24,7 +22,6 @@ def main():
 
         updatedPressedKey()
 
-        # More processing before showing the image
         ########################################################################################
         results = FrameProcessor.hands.process(image)
 
@@ -47,12 +44,11 @@ def main():
         drawString(image, text, 50, 50)
         ########################################################################################
 
-        cv2.imshow("mrreeeowwwww", image)
+        cv2.imshow("dataset acq", image)
 
         if cv2.waitKey(1) & 0xFF == ESC_KEY:
             break
 
-    print(len(data_loader.coordinate_list))
     data_loader.save_csv_data()
     cap.stop()
     cv2.destroyAllWindows()

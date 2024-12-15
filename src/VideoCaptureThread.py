@@ -5,12 +5,11 @@ class VideoCaptureThread:
     def __init__(self, src=0):
         self.cap = cv2.VideoCapture(src)
         if not self.cap.isOpened():
-            raise ValueError(f"Unable to open video source {src}")
+            raise ValueError("Unable to open video source")
         self.frame = None
         self.running = True
         self.lock = threading.Lock()
 
-        # Start the thread
         self.thread = threading.Thread(target=self.update, daemon=True)
         self.thread.start()
 

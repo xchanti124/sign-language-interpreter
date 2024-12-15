@@ -1,3 +1,4 @@
+import cv2
 import mediapipe as mp
 
 from src.dataset_acq import InputHandler
@@ -31,6 +32,35 @@ def processFrame(image, save_landmarks, results):
                 custom_landmark_style,
                 custom_connection_style,
             )
+
+            if save_landmarks:
+                Letter(InputHandler.current_letter, hand_landmarks)
+
+    return image
+
+def processFrameDrawSquare(image, save_landmarks, results, text):
+
+    if results.multi_hand_landmarks:
+
+        for hand_landmarks in results.multi_hand_landmarks:
+
+            mp_drawing.draw_landmarks(
+                image,
+                hand_landmarks,
+                mp_hands.HAND_CONNECTIONS,
+                custom_landmark_style,
+                custom_connection_style,
+            )
+
+            h, w, _ = image.shape
+            x_min = int(min([lm.x for lm in hand_landmarks.landmark]) * w)
+            y_min = int(min([lm.y for lm in hand_landmarks.landmark]) * h)
+            x_max = int(max([lm.x for lm in hand_landmarks.landmark]) * w)
+            y_max = int(max([lm.y for lm in hand_landmarks.landmark]) * h)
+
+            cv2.rectangle(image, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+
+            cv2.putText(image, text, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
             if save_landmarks:
                 Letter(InputHandler.current_letter, hand_landmarks)

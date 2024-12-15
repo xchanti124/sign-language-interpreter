@@ -1,6 +1,15 @@
-from src import FileHandler
-from src.FileHandler import save_csv
+import csv
 
+def load_csv(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        data = [row for row in reader]
+    return data
+
+def save_csv(file_path, data):
+    with open(file_path, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
 
 class DataLoader:
     def __init__(self):
@@ -9,8 +18,8 @@ class DataLoader:
 
     def load_csv_data(self):
         try:
-            self.coordinate_list = FileHandler.load_csv('./coordinate_data.csv')
-            self.label_list = FileHandler.load_csv('./label_data.csv')
+            self.coordinate_list = load_csv('./coordinate_data.csv')
+            self.label_list = load_csv('./label_data.csv')
         except Exception:
             pass
 
